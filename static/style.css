@@ -10,9 +10,12 @@ min-height: 100vh;
     background: white;
     padding: 30px;
     width: 350px;
+     max-width: 92vw;
+    border-radius: 10px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0px 0px 10px  rgba(0,0,0,0.2);
+    box-sizing: border-box;
     
     
 }
@@ -57,5 +60,15 @@ button{
         .alert-success { 
             background-color: #d4edda; color: #155724; padding: 15px; border-radius: 4px; margin-bottom: 20px;
          }
+
+         @media (max-width: 400px) {
+             .container{
+        padding: 20px;
+    }
+    .name{
+        flex-direction: column;
+        gap: 8px;
+    }
+}
 
          
