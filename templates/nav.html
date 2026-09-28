@@ -1,60 +1,100 @@
-<nav class="navbar navbar-expand-lg bg-light shadow-sm border border-warning">
+<style>
+  .logo-img { height: 40px; width: auto; }
+  .nav-avatar { width: 38px; height: 38px; object-fit: cover; }
+
+  /* Bigger tap targets in the mobile dropdown */
+  @media (max-width: 991.98px) {
+    #navbarNav .nav-link {
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    #navbarNav .nav-item:last-child .nav-link { border-bottom: none; }
+  }
+  @media (min-width: 576px) {
+    .nav-avatar { width: 44px; height: 44px; }
+  }
+  @media (min-width: 992px) {
+    .logo-img { height: 60px; }
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-light shadow-sm border border-warning sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="{{ url_for('static', filename='uploads/logo.png') }}" alt="Smart Study Planner Logo" height="60" class="d-inline-block align-text-top">
+
+    <!-- Brand / Logo -->
+    <a class="navbar-brand me-2" href="{{ url_for('dashboard') }}">
+      <img src="{{ url_for('static', filename='uploads/logo.png') }}"
+           alt="Smart Study Planner Logo"
+           class="d-inline-block align-text-top logo-img">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Left side links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{url_for('dashboard')}}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('about')}}">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('notes')}}">Notes</a>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('week_plan')}}">Weekly Planner</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('progress') }}">Study Tasks</a>
-        </li>
-        
-    
+    <!-- Bell + Profile + Hamburger (always visible, also on mobile) -->
+    <div class="d-flex align-items-center ms-auto order-lg-3 gap-2 gap-sm-3">
 
-<a href="{{ url_for('notifications') }}" class="nav-link">
- 🔔
-    {% if unread_count > 0 %}
-        <span class=" badge rounded-pill  bg-danger">{{ unread_count }}</span>
-    {% endif %}
-</a>  
-      </ul>      
-     <!-- Student Profile -->
-{% if current_navbar_user %}
-<div class="d-flex align-items-center ms-auto pt-2 pt-lg-0">
-    <a href="{{ url_for('profile') }}" class="text-decoration-none">
-        {% if current_navbar_user.profile_pic %}
+      <!-- Notifications -->
+      <a href="{{ url_for('notifications') }}"
+         class="nav-link position-relative px-1 fs-5"
+         aria-label="Notifications">
+        🔔
+        {% if unread_count and unread_count > 0 %}
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                style="font-size: 0.65rem;">
+            {{ unread_count }}
+            <span class="visually-hidden">unread notifications</span>
+          </span>
+        {% endif %}
+      </a>
+
+      <!-- Profile -->
+      {% if current_navbar_user %}
+        <a href="{{ url_for('profile') }}" class="text-decoration-none" aria-label="Profile">
+          {% if current_navbar_user.profile_pic %}
             <img src="{{ url_for('static', filename='uploads/' + current_navbar_user.profile_pic) }}"
                  alt="Profile"
-                 class="rounded-circle border border-primary border-2 shadow-sm"
-                 style="width:44px; height:44px; object-fit:cover;">
-        {% else %}
-            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold shadow-sm" 
-                 style="width: 44px; height: 44px; font-size: 0.95rem; letter-spacing: 0.5px;">
-                {{ navbar_initials }}
+                 class="rounded-circle border border-primary border-2 shadow-sm nav-avatar">
+          {% else %}
+            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold shadow-sm nav-avatar"
+                 style="font-size: 0.95rem; letter-spacing: 0.5px;">
+              {{ navbar_initials }}
             </div>
-        {% endif %}
-    </a>
-</div>
-{% endif %}
+          {% endif %}
+        </a>
+      {% endif %}
 
+      <!-- Hamburger -->
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
+
+    <!-- Collapsible links -->
+    <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}"
+             href="{{ url_for('dashboard') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}"
+             href="{{ url_for('about') }}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'notes' %}active{% endif %}"
+             href="{{ url_for('notes') }}">Notes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'week_plan' %}active{% endif %}"
+             href="{{ url_for('week_plan') }}">Weekly Planner</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'progress' %}active{% endif %}"
+             href="{{ url_for('progress') }}">Study Tasks</a>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </nav>
