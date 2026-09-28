@@ -1,0 +1,104 @@
+{%extends 'base2.html'%}
+         {%block title%} Admin Notes {%endblock%}
+
+         {%block contents%}
+
+<!-- Main Content -->
+
+<div class="main-content">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h4 class="page-title">
+            &#128196; All Notes
+        </h4>
+
+        <a href="/admin/dashboard"
+           class="btn btn-outline-secondary btn-sm">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+    <div class="card section-card">
+
+        <div class="card-body p-0">
+
+            <table class="table table-hover mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th class="ps-3">Title</th>
+                        <th>Subject</th>
+                        <th>Student(id)</th>
+                        <th>Added</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for n in notes %}
+
+                    <tr>
+
+                        <td class="ps-3 fw-semibold"
+                            style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+
+                            {{ n.title }}
+
+                        </td>
+
+                        <td>
+
+                          
+    {{ n.subject.sname if n.subject else "—" }}
+</td>
+
+                       
+
+                        <td>
+
+                            {{ n.uid  }}
+
+                        </td>
+
+                        <td class="text-muted">
+
+                            {{ n.created_at.strftime('%b %d, %Y') }}
+
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="4"
+                            class="text-center text-muted py-4">
+
+                            No notes yet.
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{%endblock%}

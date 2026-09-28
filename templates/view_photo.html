@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Profile Photo {% endblock %}
+
+{% block contents %}
+<div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark "
+     style="z-index: 1050;">
+
+    <!-- Close / Back Button -->
+    <a href="{{ url_for('profile') }}"
+       class="position-absolute top-0 end-0 m-3 m-md-4 text-white fs-1 text-decoration-none"
+       style="z-index: 1051; line-height: 1;"
+       aria-label="Close">
+        &times;
+    </a>
+
+    <!-- Full Image -->
+    <div class="d-flex align-items-center justify-content-center p-3"
+         style="max-width: 90vw; max-height: 90vh;">
+        <img src="{{ url_for('static', filename='uploads/' + user.profile_pic) }}"
+             alt="{{ user.name }}'s Profile Photo"
+             class="img-fluid rounded shadow-lg"
+             style="max-height: 90vh; width: auto; object-fit: contain;">
+    </div>
+
+</div>
+{% endblock %}

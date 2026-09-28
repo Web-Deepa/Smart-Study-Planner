@@ -1,0 +1,176 @@
+{%extends 'base2.html'%}
+         {%block title%} Admin Progress {%endblock%}
+
+         {%block contents%}
+
+
+
+
+
+<!-- Main Content -->
+
+
+<div class="main-content">
+
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+
+<h4 class="page-title">
+
+&#128200; Student Progress
+
+</h4>
+
+
+<a href="/admin/dashboard"
+class="btn btn-outline-secondary btn-sm">
+
+← Dashboard
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card section-card">
+
+
+<div class="card-body p-0">
+
+
+
+<table class="table table-hover mb-0">
+
+
+<thead class="table-light">
+
+
+<tr>
+
+<th class="ps-3">
+Student(id)
+</th>
+
+
+<th>
+Subject
+</th>
+
+
+
+<th>
+Hours Studied
+</th>
+
+
+<th>
+Date
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody>
+
+
+
+{% for p in progress %}
+
+
+<tr>
+
+
+<td class="ps-3 fw-semibold">
+
+{{ p.user.uid }}
+
+</td>
+
+
+
+<td>
+
+{{ p.subject.sname }}
+
+</td>
+
+
+
+<td>
+
+<span class="badge bg-success">
+
+{{ p.hours_spent }} hrs
+
+</span>
+
+</td>
+
+
+
+<td>
+
+{{ p.log_date.strftime('%d %b %Y') }}
+
+</td>
+
+
+
+</tr>
+
+
+
+{% else %}
+
+
+
+<tr>
+
+<td colspan="4"
+class="text-center text-muted py-4">
+
+No progress records found.
+
+</td>
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+{%endblock%}

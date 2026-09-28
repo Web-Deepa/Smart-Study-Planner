@@ -1,0 +1,73 @@
+{%extends 'base2.html'%}
+         {%block title%} Admin Plans {%endblock%}
+
+         {%block contents%}
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container-fluid py-4">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="page-title mb-0">
+                📋 Weekly Study Plans
+            </h4>
+            <a href="/admin/dashboard" class="btn btn-outline-secondary btn-sm">
+                ← Dashboard
+            </a>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card section-card">
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-3">Plan ID</th>
+                            <th>Day of Week</th>
+                            <th>Allocated Time</th>
+                            <th>Duration (Hours)</th>
+                            <th>Subject (SID)</th>
+                            <th>Student (UID)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for plan in plans %}
+                        <tr>
+                            <td class="ps-3 text-muted fw-mono">
+                                #{{ plan.wid }}
+                            </td>
+                            <td>
+                                <span class="badge bg-primary bg-opacity-10 text-primary px-2 py-1">
+                                    {{ plan.day_of_week }}
+                                </span>
+                            </td>
+                            <td class="fw-semibold">
+                                {{ plan.time }}
+                            </td>
+                            <td>
+                                {{ plan.hr }} hrs
+                            </td>
+                            <td>
+                                
+                                {{ plan.sid if plan.subject else "Subject #" ~ plan.sid }}
+                            </td>
+                            <td>
+                                {{ plan.user.uid if plan.user else "User #" ~ plan.uid }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted py-4">
+                                No weekly study plans found.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{%endblock%}

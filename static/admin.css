@@ -1,0 +1,218 @@
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#F0F2F8;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    color:#374151;
+}
+
+/* ===== Sidebar ===== */
+.admin-sidebar{
+    width:220px;
+    background:#1E3A6E;
+    min-height:100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    padding:24px 0;
+    z-index:100;
+}
+
+.admin-sidebar .brand{
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    padding:0 20px 20px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+    margin-bottom:10px;
+}
+
+.admin-sidebar .brand small{
+    display:block;
+    margin-top:3px;
+    font-size:11px;
+    color:rgba(255,255,255,.55);
+    font-weight:400;
+}
+
+.sidebar-link{
+    display:block;
+    padding:12px 20px;
+    color:rgba(255,255,255,.75);
+    text-decoration:none;
+    font-size:13px;
+    transition:.25s;
+    border-left:3px solid transparent;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active{
+    background:rgba(255,255,255,.10);
+    color:#fff;
+    border-left:3px solid #63B3ED;
+}
+
+
+
+.main-content{
+    margin-left:220px;
+    padding:30px;
+}
+
+
+.section-card{
+    background:#fff;
+    border:none;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 1px 6px rgba(0,0,0,.06);
+}
+
+
+
+.table{
+    margin-bottom:0;
+}
+
+.table thead{
+    background:#F9FAFB;
+}
+
+.table th{
+    font-size:11px;
+    text-transform:uppercase;
+    color:#6B7280;
+    font-weight:600;
+    letter-spacing:.5px;
+    padding:14px;
+}
+
+.table td{
+    vertical-align:middle;
+    padding:14px;
+    font-size:13px;
+}
+
+.table-hover tbody tr:hover{
+    background:#F8FAFC;
+}
+
+
+
+.profile-img{
+    width:30px;
+    height:30px;
+    object-fit:cover;
+    border-radius:50%;
+    margin-right:8px;
+}
+
+
+
+.badge{
+    font-weight:500;
+    padding:6px 10px;
+}
+
+
+
+.btn{
+    border-radius:8px;
+}
+
+.btn-sm{
+    font-size:12px;
+}
+
+
+
+.page-title{
+    color:#1E3A6E;
+    font-weight:700;
+}
+
+/* ===== Stat Cards ===== */
+
+.stat-card{
+    background:#fff;
+    border-radius:14px;
+    border:none;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    transition:.25s;
+}
+
+.stat-card:hover{
+    transform:translateY(-3px);
+}
+
+.stat-icon{
+    width:50px;
+    height:50px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    color:#fff;
+}
+
+.bg-blue{
+    background:#2563EB;
+}
+
+.bg-green{
+    background:#10B981;
+}
+
+.bg-yellow{
+    background:#F59E0B;
+}
+
+.bg-red{
+    background:#EF4444;
+}
+
+/* ===== Forms ===== */
+
+.form-control,
+.form-select{
+    border-radius:8px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    box-shadow:none;
+    border-color:#1E3A6E;
+}
+
+/* ===== Alerts ===== */
+
+.alert{
+    border-radius:10px;
+}
+
+/* ===== Responsive ===== */
+
+@media(max-width:768px){
+
+.admin-sidebar{
+    width:100%;
+    min-height:auto;
+    position:relative;
+}
+
+.main-content{
+    margin-left:0;
+    padding:20px;
+}
+
+.table{
+    font-size:12px;
+}
+
+}

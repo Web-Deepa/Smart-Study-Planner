@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Notes{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='notes.css') }}">
+
+{% endblock %}
+
+{% block contents %}
+
+
+<form action="/add_notes" method="POST"  enctype="multipart/form-data" >  
+    
+    
+    <div class="top-section">
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" placeholder="Enter subject name..." required>
+        </div>
+    </div>
+    
+    <div class="middle-section-flex">
+        
+      
+        <div class="left-column">
+            <div class="form-group">
+                <label for="note-file">Choose Files:</label>
+                <input type="file" id="note-file" name="note-file" multiple >
+                <div id="file-list" style="margin-top: 15px; font-weight: bold; color: #555;"></div>
+            </div>
+
+           
+            <div class="left-button-group">
+                <button type="submit" class="btn btn-primary">Save</button> 
+                <a href="{{ url_for('notes') }}" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+            </div>
+        </div>
+        
+       
+        <div class="right-column">
+            <div class="form-group">
+                <label for="note-title">Title:</label> 
+                <input type="text" id="note-title" name="title" placeholder="Enter  title...">
+                
+                <textarea id="note-content" name="note_content" placeholder="Type or paste your quick notes text here..."></textarea>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div style="margin-top: 20px;">
+            {% for category, message in messages %}
+                 <div class="alert alert-{{ category }}">
+                     {{ message }}
+                 </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+{% endblock %}

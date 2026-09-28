@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Verify OTP{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock %}
+
+{% block contents %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <div class="auth-icon">✉️</div>
+        <h3>Check your email</h3>
+        <p class="auth-subtext">
+            We sent a 6-digit code to <strong>{{ email }}</strong>. It expires in 1 minutes.
+        </p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('verify_otp') }}" class="auth-form">
+            <div class="form-group">
+                <label class="field-label">Enter OTP</label>
+                <input type="text" name="otp" class="input-field otp-input" maxlength="6"
+                       pattern="\d{6}" inputmode="numeric" placeholder="000000" required autofocus>
+            </div>
+
+            <button type="submit" class="submit-button">Verify Code</button>
+        </form>
+
+        <div class="auth-links-row">
+            <a href="{{ url_for('resend_otp') }}" class="back-link">Resend code</a>
+            <a href="{{ url_for('forgot_password') }}" class="back-link">Use a different email</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

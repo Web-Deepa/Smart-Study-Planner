@@ -1,0 +1,143 @@
+
+/*notes */
+.add{
+padding: 8px 12px;
+ background: #007bff;
+ color: white; 
+text-decoration: none; 
+border-radius: 4px;
+}
+
+.nav-container {
+    display: flex;
+  
+    gap: 10px;          
+    margin-bottom: 15px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.folder{
+
+    margin-bottom: 20px;
+     padding: 15px;
+      border: 1px solid #ccc;
+       border-radius: 6px;
+        background-color: #f9f9f9;
+}
+h4{
+    margin-top: 0; 
+    color: #d9822b;
+}
+a{
+    margin:10px;
+}
+
+.ul{
+    list-style:none;
+}
+li{
+    
+    margin-bottom: 8px;
+}
+
+span{
+    font-size: 0.8em; 
+    color: #777; 
+    margin-left: 10px;
+}
+
+input{
+
+    margin:10px;
+}
+ul{
+  list-style-type: none; 
+  padding-left: 20px;
+}
+
+.btn{
+    margin:10px;
+}
+
+    .add-notes-form {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    .top-section {
+        width: 100%;
+    }
+
+    
+    .middle-section-flex {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap; 
+    }
+
+    .left-column {
+        flex: 1;
+        min-width: 280px;
+        display: flex;
+        flex-direction: column;
+    }
+
+  
+    .right-column {
+        flex: 1;
+        min-width: 280px;
+    }
+
+   
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #333;
+    }
+
+    .form-group input[type="text"],
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-group textarea {
+        height: 150px;
+        resize: vertical;
+        margin-top: 10px;
+    }
+
+
+    .left-button-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+textarea{
+    width: 100%;
+     height: 250px; 
+     padding: 10px;
+      border: 1px solid #ccc;
+       border-radius: 4px;
+        box-sizing: border-box; 
+        resize: vertical;
+}

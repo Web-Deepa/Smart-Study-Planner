@@ -1,0 +1,64 @@
+{%extends 'base.html'%}
+{%block title%}Plan Here{%endblock%}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='notes.css') }}">
+{% endblock %}
+{%block contents%}
+
+<div class="nav-container">
+       <a href="{{url_for('add_plan')}}">Plan here<a>
+
+        <form action="{{ url_for('week_plan') }}" method="GET" class="search-form">
+        <input type="text" name="search" placeholder="Search plans by day." required>
+        <button type="submit">Search</button>
+    </form>
+    
+
+    </div>
+<hr class="mt-0">
+
+<h3>Your Weekly Plan</h3>
+
+<table class="table table-bordered border-dark column-only ">
+
+<tr class="border-dark">
+    <th>Day</th>
+    <th>Subject</th>
+    <th>Hours</th>
+    <th>Time</th>
+    <th>Actions</th>
+</tr>
+
+{% for plan in plans %}
+
+<tr>
+
+    <td>{{ plan.day_of_week }}</td>
+
+  <td>
+{% for subject in subjects %}
+    {% if subject.sid == plan.sid %}
+        {{ subject.sname }}
+    {% endif %}
+{% endfor %}
+</td>
+
+    <td>{{ plan.hr }}</td>
+    <td>{{plan.time.strftime('%I:%M %p')}}</td>
+
+    <td>
+    <a href="/edit_plan/{{ plan.wid }}">Edit</a>
+
+    <a href="/delete_plan/{{ plan.wid }}"
+       onclick="return confirm('Delete this plan?')">
+       Delete
+    </a>
+</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

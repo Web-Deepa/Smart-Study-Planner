@@ -1,0 +1,245 @@
+{%extends 'base2.html'%}
+         {%block title%} Admin Dashboard {%endblock%}
+
+         {%block contents%}
+
+
+
+
+
+
+<!-- Main Content -->
+
+<div class="main-content">
+
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+
+        <h4 class="page-title">
+            &#128101; All Users
+        </h4>
+
+
+        <a href="/admin/dashboard"
+           class="btn btn-outline-secondary btn-sm">
+
+            ← Dashboard
+
+        </a>
+
+
+    </div>
+
+
+
+
+    <!-- Flash Messages -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for c,m in messages %}
+
+                <div class="alert alert-{{c}}">
+                    {{m}}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+
+
+
+    <!-- Users Table -->
+
+    <div class="card section-card">
+
+
+        <div class="card-body p-0">
+
+
+            <table class="table table-hover mb-0">
+
+
+                <thead class="table-light">
+
+                <tr>
+
+                     <th>
+                       Id
+                    </th>
+                    <th class="ps-3">
+                        Name
+                    </th>
+
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        College
+                    </th>
+
+                    <th>
+                        Program
+                    </th>
+
+                    <th>
+                        Semester
+                    </th>
+
+                    <th>
+                        Role
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                {% for u in users %}
+
+
+                <tr>
+<td>
+    {{u.uid}}
+</td>
+
+                    <td class="ps-3 fw-semibold">
+
+
+                        {% if u.profile_pic %}
+
+                        <img
+                        src="/static/uploads/{{u.profile_pic}}"
+                        class="profile-img">
+
+                        {% endif %}
+                        <br>
+
+
+                        {{u.name}}
+
+
+                    </td>
+
+
+
+                    <td>
+                        {{u.email}}
+                    </td>
+
+
+
+                    <td>
+
+                        {{u.college.name if u.college else "—"}}
+
+                    </td>
+
+
+
+                    <td>
+
+                        {{u.program or "—"}}
+
+                    </td>
+
+
+
+                    <td>
+
+                        {{u.sem or "—"}}
+
+                    </td>
+
+
+
+                    <td>
+
+
+                        {% if u.role %}
+
+                        <span class="badge bg-danger">
+                          {{u.role.name}}
+                        </span>
+
+
+                        {% else %}
+
+
+                        <span class="badge bg-secondary">
+                            Student
+                        </span>
+
+
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if not  u.role_id==1 %}
+
+<a href="{{ url_for('admin_delete_user', uid=u.uid) }}"
+   class="btn btn-outline-danger btn-sm"
+   onclick="return confirm('Delete {{ u.name }}?');">
+   Delete
+</a>
+
+ {% endif %}
+
+                    </td>
+
+
+
+                </tr>
+
+
+
+                {% else %}
+
+
+                <tr>
+
+                    <td colspan="7"
+                        class="text-center text-muted py-4">
+
+                        No users found.
+
+                    </td>
+
+                </tr>
+
+
+                {% endfor %}
+
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{%endblock%}

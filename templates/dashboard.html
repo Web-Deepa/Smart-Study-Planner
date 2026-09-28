@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+         {%block title%} Dashboard {%endblock%}
+
+         {% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='da.css') }}">
+
+{% endblock %}
+    
+   {% block contents %} 
+       <main class="main">
+       <div class="topbar">
+        <div>
+          <h1 class="page-title mt-2" id="greeting">Have a Good Study, {{ user.name }}</h1>
+          <p class="page-sub">
+      {% if user.college %}
+        {{ user.college.name }} &bull; 
+    {% endif %}
+             {{ user.sem }}, {{ user.program }}</p>
+        </div>
+       
+      
+      </div>
+
+      <!-- Stat cards -->
+     <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Studied this week</div>
+      <div class="stat-value">{{ studied_this_week }}H</div>
+      <div class="stat-hint">Planned: {{ weekly_hours }}H</div>
+      <span class="tag tag-amber">Actual study time</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Study streak</div>
+      <div class="stat-value">{{ current_streak }}</div>
+      <div class="stat-hint">days in a row</div>
+      <span class="tag tag-green">Keep going!</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Notes saved</div>
+      <div class="stat-value">{{ notes_count }}</div>
+      <div class="stat-hint">across {{ unique_subjects }} subjects</div>
+      <span class="tag tag-blue">+{{ recent_notes_count }} this week</span>
+    </div>
+          
+      </div>
+      </main>
+<a href="{{url_for('notes')}}" class="btn btn-primary">View Your notes</a>
+<a href="{{url_for('week_plan')}}" class="btn btn-primary">Plan your Study</a>
+      
+       
+    
+             {%endblock%}

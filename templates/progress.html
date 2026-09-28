@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block title %}Study Progress{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='prog.css') }}">
+{% endblock %}
+
+{% block contents %}
+<div class="container my-4">
+
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">📈 Study Progress</h2>
+      <p class="text-muted mb-0">Week: <strong>{{ start_date }} &ndash; {{ end_date }}</strong></p>
+    </div>
+    <a href="{{ url_for('log_study') }}" class="btn btn-success">
+      + Log Study Session
+    </a>
+  </div>
+
+  <!-- Overall Progress Card Summary -->
+  <div class="card border-2 shadow-sm mb-4 p-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h6 class="fw-bold mb-0">Overall weekly progress</h6>
+      <span class="fw-bold fs-5 text-success">{{ global_pct }}%</span>
+    </div>
+    <div class="progress mb-2" style="height:18px;">
+      <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+           role="progressbar"
+           style="width: {{ global_pct }}%;">
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <small class="text-muted">Studied: <strong>{{ total_studied }} hrs</strong></small>
+      <small class="text-muted">Planned: <strong>{{ total_planned }} hrs</strong></small>
+    </div>
+  </div>
+
+  {% if subject_data %}
+
+  <!-- Chart.js Container Display -->
+  <div class="card border-4 shadow-sm mb-4 p-4">
+    <h6 class="fw-bold mb-3">Subject-wise progress (Planned vs Studied)</h6>
+    <div style="position:relative; height:280px;">
+      <canvas id="progressChart" role="img"
+              aria-label="Bar chart comparing planned and studied hours per subject">
+      </canvas>
+    </div>
+    <div class="d-flex gap-4 mt-3 justify-content-center">
+      <span class="d-flex align-items-center gap-2 small">
+        <span style="width:14px;height:14px;background:#C8D8F5;display:inline-block;border-radius:2px;"></span>
+        Planned hours
+      </span>
+      <span class="d-flex align-items-center gap-2 small">
+        <span style="width:14px;height:14px;background:#1D9E75;display:inline-block;border-radius:2px;"></span>
+        Studied hours
+      </span>
+    </div>
+  </div>
+
+  <!-- Detailed Subject Breakdown Section -->
+  <div class="card border-2 shadow-sm mb-4 p-4">
+    <h6 class="fw-bold mb-3">Subject breakdown</h6>
+    {% for sname, data in subject_data.items() %}
+    <div class="mb-3">
+      <div class="d-flex justify-content-between mb-1">
+       
+<span class="fw-semibold" style="color: {{ data.color }};">{{ sname }}</span>
+        <span class="text-muted small">
+          {{ data.studied_hours }}h studied / {{ data.planned_hours }}h planned
+          &mdash; <strong>{{ data.pct }}%</strong>
+        </span>
+      </div>
+      <div class="progress" style="height:12px;">
+       <div class="progress-bar"
+     role="progressbar"
+     style="width: {{ data.pct }}%; background: {{ data.color }};"
+     aria-valuenow="{{ data.pct }}"
+     aria-valuemin="0"
+     aria-valuemax="100">
+</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Study Log Table Entry Layout -->
+  <div class="card border-2 shadow-sm mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+      <h6 class="fw-bold mb-0">📝 Study sessions this week</h6>
+      <a href="{{ url_for('log_study') }}" class="btn btn-sm btn-outline-success">+ Log</a>
+    </div>
+    <div class="card-body p-0">
+      {% if recent_logs %}
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            <th>Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in recent_logs %}
+          <tr>
+            <td>{{ log.log_date.strftime('%a, %b %d') }}</td>
+            <td>{{ subject_map.get(log.sid, 'Unknown') }}</td>
+            <td><span class="badge bg-success">{{ log.hours_spent }}h</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="text-center text-muted p-4">
+        No study sessions logged this week yet.
+        <br>
+        <a href="{{ url_for('log_study') }}" class="btn btn-sm btn-success mt-2">
+          Log your first session
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% else %}
+  <!-- Empty State Fallback -->
+  <div class="card text-center p-5 border-0 shadow-sm">
+    <div class="fs-1 mb-3">📋</div>
+    <h4 class="fw-bold text-muted">No data yet</h4>
+    <p class="text-muted">Add a weekly plan and log your study sessions to see progress here.</p>
+    <div class="d-flex gap-2 justify-content-center">
+      <a href="{{ url_for('add_plan') }}" class="btn btn-primary">Add Weekly Plan</a>
+      <a href="{{ url_for('log_study') }}" class="btn btn-success">Log Study</a>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+<!-- Core Script Integrations -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div id="chart-data" 
+     data-labels='{{ chart_labels | tojson | safe }}'
+     data-planned='{{ chart_planned | tojson | safe }}'
+     data-studied='{{ chart_studied | tojson | safe }}'
+     data-colors='{{ chart_colors | tojson | safe }}'>
+</div>
+<script src="{{ url_for('static', filename='progress.js') }}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% set hide_nav = True %}
+
+{% block title %}Home page{% endblock %}
+ 
+{% block contents %}
+<div class="mt-5">
+    <h2>Study with Smart System</h2>
+    <h3>No more study is Perfect <br> Smart study is perfect</h3>
+    <p>Please login or signup to plan your study</p>
+
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+  
+    <a href="{{ url_for('signup') }}" class="btn btn-secondary">Signup</a>
+   
+
+</div>
+
+
+         <p class="p-5">  तपाइको भविष्यको सारथी <br>
+            <img src="static/uploads/logo.png" width="150px" height="100px"> </p>
+{% endblock %}

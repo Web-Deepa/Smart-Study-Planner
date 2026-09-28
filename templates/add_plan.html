@@ -1,0 +1,79 @@
+{%extends 'base.html'%}
+{%block title%}Plan Here{%endblock%}
+
+ 
+{%block contents%}
+ 
+<div class="mt-3">
+<form method="POST">
+
+    <label>Subject</label>
+
+    <select name="subject" required>
+
+        {% for subject in subjects %}
+
+        <option value="{{ subject.sid }}">
+            {{ subject.sname }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Day</label>
+
+    <select name="day" required>
+
+        <option>Sunday</option>
+         <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+
+    </select>
+
+    <br><br>
+
+    <label>Hours</label>
+
+    <input
+        type="number"
+        name="hours"
+        step="0.5"
+        min="0"
+        max="12"
+        required
+    >
+
+    <br><br>
+    <label>Time</label>
+    <input type="time" name="time" required><br>
+
+    <button  class="btn btn-success mt-3">
+        Save Plan
+    </button>
+    <a href="{{url_for('week_plan')}}"  class="btn btn-secondary mt-3">
+      Cancel </a>
+    
+
+</form>
+
+
+     {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+                 <div class="alert alert-{{category}}">{{ message }}<div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+              
+</div>
+
+{%endblock%}
+
+

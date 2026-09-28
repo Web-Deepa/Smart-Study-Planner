@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+{%block title%}Plan Here{%endblock%}
+
+ {% block styles %} {% endblock %}
+
+ 
+{%block contents%}
+<div class="mt-3">
+<form method="POST" action= "{{ url_for('edit_plan', wid=plan.wid) }}">
+
+    <label>Subject</label>
+
+    <select name="subject" required>
+
+        {% for subject in subjects %}
+
+        <option value="{{ subject.sid }}" {% if subject.sid == plan.sid %}selected{% endif %}>
+            {{ subject.sname }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Day</label>
+
+    <select name="day" required>
+
+    {% for d in ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] %}
+        <option value="{{ d }}" {% if d ==plan.day_of_week %}selected{% endif %}>{{ d }}</option>
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>Hours</label>
+
+    <input type="number" name="hours" min="1" max="12" value="{{ plan.hr }}" required>
+
+    <br><br>
+    <label>Time</label>
+     <input type="time" name="time" value="{{ plan.time.strftime('%H:%M') if plan.time else '' }}" required>
+     <br><br>
+
+
+ <button type="submit" class="btn btn-success mt-2">Update Plan</button>
+    <a href="{{ url_for('week_plan') }}" class="btn btn-danger mt-2">Cancel</a>
+
+</form>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+                 <div class="alert alert-{{category}}">{{ message }}<div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+</div>
+{%endblock%}

@@ -1,0 +1,21 @@
+
+.container {
+    max-width: 900px;
+}
+
+.progress {
+    background-color: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.gap-4 {
+    gap: 1.5rem !important;
+}
+
+.table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}

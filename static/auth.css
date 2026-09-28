@@ -1,0 +1,139 @@
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F0F2F8;
+    padding: 20px;
+}
+
+.auth-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 40px 32px;
+    text-align: center;
+}
+
+.auth-icon {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+
+.auth-card h3 {
+    color: #1E3A6E;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.auth-subtext {
+    color: #6B7280;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.85rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #374151;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #2563EB;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.otp-input {
+    text-align: center;
+    letter-spacing: 8px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.submit-button {
+    padding: 12px;
+    background-color: #1E3A6E;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    margin-top: 4px;
+}
+
+.submit-button:hover {
+    background-color: #16305c;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 18px;
+    color: #2563EB;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    color: #1E3A6E;
+}
+
+.auth-links-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.alert {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.alert-success {
+    background: #DCFCE7;
+    color: #166534;
+}
+
+.alert-danger {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 32px 22px;
+    }
+}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Notifications{% endblock %}
+ 
+{% block contents %}
+
+<h3>Notifications</h3>
+
+{% for n in notifications %}
+
+<div class="alert {% if n.is_read %}alert-light{% else %}alert-warning{% endif %}">
+
+    <h5>{{ n.title }}</h5>
+
+    <p>{{ n.message }}</p>
+
+    <small>{{ n.created_at }}</small>
+
+  
+    
+
+
+  
+</div>
+
+{% else %}
+
+<p>No notifications.</p>
+
+{% endfor %}
+{% endblock %}

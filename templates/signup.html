@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+             <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>Signup Page</title>
+    </head>
+    <body>
+
+  
+    <div class="container">
+        <h2>Create a new account</h2>
+
+        <!-- Error message display placeholder -->
+        {% if error %}
+            <p style="color: red; text-align: center;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{url_for('signup')}}">
+            <div class="name">
+            <input type="text" name="name" placeholder="Full Name" required> 
+         
+            </div>
+            <select name="role" required> 
+                <option value="disabled selected">Select role</option>
+             <option value="Student">Student</option>
+                </select>
+            <input type="text" name="college" placeholder="College Name" required> 
+            <select name="faculty"  required>
+                  <option value="" disabled selected>Select your Faculty</option>
+    <option value="Civil Engineering">Civil Engineering</option>
+
+    <option value="Software Engineering">Software Engineering</option>
+    <option value=" Computer Engineering">Computer Engineering</option>
+
+            <select name="semester" >
+                <select name="semester" id="semester" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+    <option value="" disabled selected>Select Semester</option>
+    <option value="1st Semester">1st Sem</option>
+    <option value="2nd Semester">2nd Sem</option>
+    <option value="3rd Semester">3rd Sem</option>
+    <option value="4th Semester">4th Sem</option>
+    <option value="5th Semester">5th Sem</option>
+    <option value="6th Semester">6th Sem</option>
+    <option value="7th Semester">7th Sem</option>
+    <option value="8th Semeester">8th sem</option>
+
+                </select>
+  
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        
+              {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category , message in messages %}
+       <div class=alert alert-{{category}}>{{ message }}<div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+        <p>
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login</a>
+        </p>
+    </div>
+    <script src="{{ url_for('static', filename='signup.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Notes Directory{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='notes.css') }}">
+{% endblock %}
+
+{% block contents %}
+<h4 class="pt-2">View Your Notes</h4>
+<div class="nav-container">
+<a href="{{ url_for('add_notes') }}">+Add New Note</a>
+
+ 
+    <form action="{{ url_for('notes') }}" method="GET" class="search-form">
+        <input type="text" name="search" placeholder="Search notes by subject.." required>
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div class="notes-list">
+    {% if grouped_notes %}
+        
+
+        <div class="directory-container">
+        {% for subject, notes in grouped_notes.items() %}
+            <div class="folder" >
+                <h4>📁 {{ subject }} </h4>
+
+                 {% if notes %}
+            <a href="/delete_subject/{{ notes[0].sid }}" 
+               onclick="return confirm('Are you sure to delete folder')" > Delete Folder</a>
+         
+              
+            </a>
+        {% endif %}
+                <ul>
+                {% for note in notes %}
+                    <li>
+                        📄 <a href="{{ url_for('view_note_file', nid=note.nid)  }}" target="_blank">
+                            {{ note.title }}
+                        </a>
+                        <span>
+                            (Uploaded: {{ note.created_at.strftime('%Y-%m-%d') }})
+                        </span>
+
+                            {% if note.title.lower().endswith('.txt') %}
+            <a href="{{ url_for('edit_note', nid=note.nid) }}" >
+                Edit Note
+            </a>
+        {% endif %}
+                                
+              <a href="{{url_for('download_note', nid=note.nid) }}"download>Download</a>
+
+                              <a href="/delete_notes/{{ note.nid }}"
+                               onclick="return confirm('Delete this note?')">   Delete
+                            </a>
+                          
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+      
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>Your directory tree is empty. Click the button above to upload your first note file.</p>
+    {% endif %}
+</div>
+{% endblock %}

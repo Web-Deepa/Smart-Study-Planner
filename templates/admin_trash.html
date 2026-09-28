@@ -1,0 +1,196 @@
+{% extends 'base2.html' %}
+{% block title %} Trash {% endblock %}
+
+{% block contents %}
+<div class="main-content container py-4">
+
+  <!-- Header Section -->
+  <div class="row align-items-center mb-4 pb-2 border-bottom">
+    <div class="col-sm-6">
+      <h1 class="display-5 text-dark m-0">Trash Bin</h1>
+    </div>
+    <div class="col-sm-6 text-sm-end mt-2 mt-sm-0">
+      <a href="{{ url_for('admin_dashboard') }}" class="btn btn-outline-secondary btn-sm">
+        &larr; Back to Dashboard
+      </a>
+    </div>
+  </div>
+
+  <!-- Flash Messages Section -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="row">
+        <div class="col-12">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Main Trash Content Layout -->
+  <div class="row g-4">
+
+    <!-- Deleted Users Table -->
+    <div class="col-10">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="card-title mb-0 text-secondary">Deleted Users</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle mb-0">
+            <thead class="table-dark">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Deleted At</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for u in deleted_users %}
+              <tr>
+                <td class="fw-semibold">{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td><small class="text-muted">{{ u.deleted_at }}</small></td>
+                <td class="text-end">
+                  <a href="{{ url_for('admin_restore', kind='user', item_id=u.uid) }}" class="btn btn-success btn-sm me-1">Restore</a>
+                  <a href="{{ url_for('admin_permanent_delete', kind='user', item_id=u.uid) }}" 
+                     class="btn btn-danger btn-sm"
+                     onclick="return confirm('Permanently delete this user? This cannot be undone.');">Delete Forever</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="4" class="text-center text-muted py-4">Nothing here.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deleted Subjects Table -->
+    <div class="col-10">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="card-title mb-0 text-secondary">Deleted Subjects</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle mb-0">
+            <thead class="table-dark">
+              <tr>
+                <th>Subject</th>
+                <th>Deleted At</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for s in deleted_subjects %}
+              <tr>
+                <td class="fw-semibold">{{ s.sname }}</td>
+                <td><small class="text-muted">{{ s.deleted_at }}</small></td>
+                <td class="text-end">
+                  <a href="{{ url_for('admin_restore', kind='subject', item_id=s.sid) }}" class="btn btn-success btn-sm me-1">Restore</a>
+                  <a href="{{ url_for('admin_permanent_delete', kind='subject', item_id=s.sid) }}" 
+                     class="btn btn-danger btn-sm"
+                     onclick="return confirm('Permanently delete this subject and its folder? This cannot be undone.');">Delete Forever</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="3" class="text-center text-muted py-4">Nothing here.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deleted Notes Table -->
+    <div class="col-10">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="card-title mb-0 text-secondary">Deleted Notes</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle mb-0">
+            <thead class="table-dark">
+              <tr>
+                <th>Title</th>
+                <th>Deleted At</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for n in deleted_notes %}
+              <tr>
+                <td class="fw-semibold">{{ n.title }}</td>
+                <td><small class="text-muted">{{ n.deleted_at }}</small></td>
+                <td class="text-end">
+                  <a href="{{ url_for('admin_restore', kind='note', item_id=n.nid) }}" class="btn btn-success btn-sm me-1">Restore</a>
+                  <a href="{{ url_for('admin_permanent_delete', kind='note', item_id=n.nid) }}" 
+                     class="btn btn-danger btn-sm"
+                     onclick="return confirm('Permanently delete this note? This cannot be undone.');">Delete Forever</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="3" class="text-center text-muted py-4">Nothing here.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deleted Weekly Plans Table -->
+    <div class="col-10">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="card-title mb-0 text-secondary">Deleted Weekly Plans</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-striped align-middle mb-0">
+            <thead class="table-dark">
+              <tr>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Deleted At</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in deleted_plans %}
+              <tr>
+                <td class="fw-semibold">{{ p.day_of_week }}</td>
+                <td>{{ p.time }}</td>
+                <td><small class="text-muted">{{ p.deleted_at }}</small></td>
+                <td class="text-end">
+                  <a href="{{ url_for('admin_restore', kind='plan', item_id=p.wid) }}" class="btn btn-success btn-sm me-1">Restore</a>
+                  <a href="{{ url_for('admin_permanent_delete', kind='plan', item_id=p.wid) }}" 
+                     class="btn btn-danger btn-sm"
+                     onclick="return confirm('Permanently delete this plan? This cannot be undone.');">Delete Forever</a>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="4" class="text-center text-muted py-4">Nothing here.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End Row -->
+</div> <!-- End Main Content Container -->
+{% endblock %}
