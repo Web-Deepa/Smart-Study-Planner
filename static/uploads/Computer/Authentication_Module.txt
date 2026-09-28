@@ -1,8 +1,0 @@
-Authentication Module
-Note Module
-Weekly Planner Module
-Subject Module
-Study Streak Module
-Admin Module
-
-Database Management Module
