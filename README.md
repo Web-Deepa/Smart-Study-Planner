@@ -1,1 +1,0 @@
-# Smart-Study-Planner
