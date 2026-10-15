@@ -1,59 +1,35 @@
-<style>
-  .logo-img { height: 40px; width: auto; }
-  .nav-avatar { width: 38px; height: 38px; object-fit: cover; }
+<nav class="navbar navbar-expand-lg bg-light shadow-sm sticky-top border border-warning">
 
-  /* Bigger tap targets in the mobile dropdown */
-  @media (max-width: 991.98px) {
-    #navbarNav .nav-link {
-      padding: 0.75rem 0.5rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-    #navbarNav .nav-item:last-child .nav-link { border-bottom: none; }
-  }
-  @media (min-width: 576px) {
-    .nav-avatar { width: 44px; height: 44px; }
-  }
-  @media (min-width: 992px) {
-    .logo-img { height: 60px; }
-  }
-</style>
+  <div class="container-fluid flex-nowrap">
 
-<nav class="navbar navbar-expand-lg bg-light shadow-sm border border-warning sticky-top">
-  <div class="container-fluid">
-
-    <!-- Brand / Logo -->
-    <a class="navbar-brand me-2" href="{{ url_for('dashboard') }}">
-      <img src="{{ url_for('static', filename='uploads/logo.png') }}"
-           alt="Smart Study Planner Logo"
-           class="d-inline-block align-text-top logo-img">
+    <!-- Brand Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="{{ url_for('static', filename='uploads/logo.png') }}" alt="logo" width="60" height="60" class="rounded-circle border border-dark ">
     </a>
 
-    <!-- Bell + Profile + Hamburger (always visible, also on mobile) -->
+    <!-- Action Items Area: Kept completely outside the collapsible list -->
     <div class="d-flex align-items-center ms-auto order-lg-3 gap-2 gap-sm-3">
-
-      <!-- Notifications -->
-      <a href="{{ url_for('notifications') }}"
-         class="nav-link position-relative px-1 fs-5"
-         aria-label="Notifications">
+      
+      <!-- Notifications Bell -->
+      <a href="/notifications" class="nav-link position-relative px-2 fs-5" aria-label="Notifications">
         🔔
         {% if unread_count and unread_count > 0 %}
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                style="font-size: 0.65rem;">
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6 p-1">
             {{ unread_count }}
             <span class="visually-hidden">unread notifications</span>
           </span>
         {% endif %}
       </a>
 
-      <!-- Profile -->
+      <!-- Profile Photo Circle -->
       {% if current_navbar_user %}
-        <a href="{{ url_for('profile') }}" class="text-decoration-none" aria-label="Profile">
+        <a href="{{ url_for('profile') }}" class="d-flex align-items-center justify-content-center text-decoration-none" aria-label="Profile" style="width: 40px; height: 40px;">
           {% if current_navbar_user.profile_pic %}
             <img src="{{ url_for('static', filename='uploads/' + current_navbar_user.profile_pic) }}"
                  alt="Profile"
-                 class="rounded-circle border border-primary border-2 shadow-sm nav-avatar">
+                 class="w-100 h-100 rounded-circle border border-dark  shadow-sm object-fit-cover d-block">
           {% else %}
-            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold shadow-sm nav-avatar"
+            <div class="w-100 h-100 rounded-circle bg-info text-dark border border-dark d-flex align-items-center justify-content-center fw-bold shadow-sm lh-1"
                  style="font-size: 0.95rem; letter-spacing: 0.5px;">
               {{ navbar_initials }}
             </div>
@@ -61,38 +37,20 @@
         </a>
       {% endif %}
 
-      <!-- Hamburger -->
-      <button class="navbar-toggler" type="button"
-              data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false"
-              aria-label="Toggle navigation">
+      <!-- Hamburger Button (Only controls text links) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-
-    <!-- Collapsible links -->
-    <div class="collapse navbar-collapse order-lg-2" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}"
-             href="{{ url_for('dashboard') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}"
-             href="{{ url_for('about') }}">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint == 'notes' %}active{% endif %}"
-             href="{{ url_for('notes') }}">Notes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint == 'week_plan' %}active{% endif %}"
-             href="{{ url_for('week_plan') }}">Weekly Planner</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if request.endpoint == 'progress' %}active{% endif %}"
-             href="{{ url_for('progress') }}">Study Tasks</a>
-        </li>
+   
+    <!-- Text Links Only -->
+    <div class="collapse navbar-collapse order-lg-2" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+        <li class="nav-item"><a class="nav-link mx-2" href="/home">Home</a></li>
+       
+        <li class="nav-item"><a class="nav-link mx-2" href="/notes">Notes</a></li>
+        <li class="nav-item"><a class="nav-link mx-2" href="/week_plan">Weekly Plan</a></li>
+        <li class="nav-item"><a class="nav-link mx-2" href="/progress">Progress</a></li>
       </ul>
     </div>
 

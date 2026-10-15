@@ -9,7 +9,7 @@ min-height: 100vh;
 .container{
     background: white;
     padding: 30px;
-    width: 350px;
+    width: 450px;
      max-width: 92vw;
     border-radius: 10px;
     border-radius: 10px;
@@ -24,27 +24,22 @@ h2{
 }
 
 
-input,select{
-    width: 90%;
+input,select,button{
+    width: 100%;
     padding: 10px;
     margin:10px;
     border: 1px solid #ccc;
     border-radius: 8px;
   box-sizing:border-box;
 }
+button{
+    background-color:rgb(60, 60, 216);
+}
 .name{
     display:flex;
     gap:20px;
 }
-button{
-    width: 100%;
-    padding:10px;
-    background:blue;
-    color:white;
-    border: 0px;
-    border-radius: 8px;
-    cursor: pointer;
-}
+
 .form-row 
 { display: flex; gap: 20px; margin-bottom: 15px; 
 }

@@ -1,0 +1,6 @@
+Diabetic Retinopathy has 4 grades.
+.No DR
+.Mild DR
+.Moderate DR 
+.Severe DR
+.Proliferative DR

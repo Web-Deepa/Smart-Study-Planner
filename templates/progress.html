@@ -14,7 +14,7 @@
       <h2 class="fw-bold mb-1">📈 Study Progress</h2>
       <p class="text-muted mb-0">Week: <strong>{{ start_date }} &ndash; {{ end_date }}</strong></p>
     </div>
-    <a href="{{ url_for('log_study') }}" class="btn btn-success">
+    <a href="{{ url_for('log_study') }}" class="btn btn-primary">
       + Log Study Session
     </a>
   </div>
@@ -53,7 +53,7 @@
         Planned hours
       </span>
       <span class="d-flex align-items-center gap-2 small">
-        <span style="width:14px;height:14px;background:#1D9E75;display:inline-block;border-radius:2px;"></span>
+        <span style="width:14px;height:14px;background:hsl(236, 84%, 70%);display:inline-block;border-radius:2px;"></span>
         Studied hours
       </span>
     </div>
@@ -115,7 +115,7 @@
       <div class="text-center text-muted p-4">
         No study sessions logged this week yet.
         <br>
-        <a href="{{ url_for('log_study') }}" class="btn btn-sm btn-success mt-2">
+        <a href="{{ url_for('log_study') }}" class="btn btn-sm btn-primary mt-2">
           Log your first session
         </a>
       </div>
@@ -131,7 +131,7 @@
     <p class="text-muted">Add a weekly plan and log your study sessions to see progress here.</p>
     <div class="d-flex gap-2 justify-content-center">
       <a href="{{ url_for('add_plan') }}" class="btn btn-primary">Add Weekly Plan</a>
-      <a href="{{ url_for('log_study') }}" class="btn btn-success">Log Study</a>
+      <a href="{{ url_for('log_study') }}" class="btn btn-primary">Log Study</a>
     </div>
   </div>
   {% endif %}

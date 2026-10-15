@@ -12,10 +12,10 @@
 
 <form action="/add_notes" method="POST"  enctype="multipart/form-data" >  
     
-    
+   
     <div class="top-section">
         <div class="form-group">
-            <label for="subject">Subject:</label>
+            <label for="subject" class="pt-4">Subject:</label>
             <input type="text" id="subject" name="subject" placeholder="Enter subject name..." required>
         </div>
     </div>
@@ -33,7 +33,7 @@
            
             <div class="left-button-group">
                 <button type="submit" class="btn btn-primary">Save</button> 
-                <a href="{{ url_for('notes') }}" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+                <a href="{{ url_for('notes') }}" class="btn btn-danger" style="text-decoration: none;">Cancel</a>
             </div>
         </div>
         

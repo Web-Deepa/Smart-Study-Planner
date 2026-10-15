@@ -11,7 +11,7 @@
        <main class="main">
        <div class="topbar">
         <div>
-          <h1 class="page-title mt-2" id="greeting">Have a Good Study, {{ user.name }}</h1>
+          <h4 class="  text-warning mt-2" id="greeting">Have a Good Study, {{ user.name }}</h4>
           <p class="page-sub">
       {% if user.college %}
         {{ user.college.name }} &bull; 
@@ -23,31 +23,43 @@
       </div>
 
       <!-- Stat cards -->
-     <div class="stat-grid">
-    <div class="stat-card">
+     <div class=" container my-5">
+        <div class="row g-3">
+
+          
+        <div class="col-12 col-md-6 col-lg-3 mb-4">  
+
+    <div class="stat-card ">
       <div class="stat-label">Studied this week</div>
       <div class="stat-value">{{ studied_this_week }}H</div>
       <div class="stat-hint">Planned: {{ weekly_hours }}H</div>
       <span class="tag tag-amber">Actual study time</span>
     </div>
+    </div>
+
+
+     <div class="col-12 col-md-6 col-lg-3 mb-4">  
     <div class="stat-card">
       <div class="stat-label">Study streak</div>
       <div class="stat-value">{{ current_streak }}</div>
       <div class="stat-hint">days in a row</div>
       <span class="tag tag-green">Keep going!</span>
     </div>
+    </div>
+
+     <div class="col-12 col-md-6 col-lg-3 mb-4">  
     <div class="stat-card">
       <div class="stat-label">Notes saved</div>
       <div class="stat-value">{{ notes_count }}</div>
       <div class="stat-hint">across {{ unique_subjects }} subjects</div>
       <span class="tag tag-blue">+{{ recent_notes_count }} this week</span>
     </div>
-          
+    </div>
+
+          </div>
       </div>
-      </main>
-<a href="{{url_for('notes')}}" class="btn btn-primary">View Your notes</a>
-<a href="{{url_for('week_plan')}}" class="btn btn-primary">Plan your Study</a>
+     </main>
+
+
       
-       
-    
-             {%endblock%}
+         {%endblock%}

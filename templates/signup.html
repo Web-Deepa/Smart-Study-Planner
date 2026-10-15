@@ -2,7 +2,8 @@
 <html>
     <head>
              <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <title>Signup Page</title>
+        
+             <title>Signup Page</title>
     </head>
     <body>
 
@@ -16,23 +17,28 @@
         {% endif %}
 
         <form method="POST" action="{{url_for('signup')}}">
-            <div class="name">
+            
             <input type="text" name="name" placeholder="Full Name" required> 
          
-            </div>
+        
             <select name="role" required> 
                 <option value="disabled selected">Select role</option>
              <option value="Student">Student</option>
                 </select>
             <input type="text" name="college" placeholder="College Name" required> 
-            <select name="faculty"  required>
+            <select name="faculty" id="faculty_select" required>
                   <option value="" disabled selected>Select your Faculty</option>
     <option value="Civil Engineering">Civil Engineering</option>
 
     <option value="Software Engineering">Software Engineering</option>
     <option value=" Computer Engineering">Computer Engineering</option>
+    <option value="Others" name="other_faculty" >Others</option>
+</select>
 
-            <select name="semester" >
+<div id="other_faculty_container" class="mt-1 p-2" style="display:none;">
+<input type="text" name="other_faculty" id="other_faculty" placeholder="enter faculty name">
+</div>
+
                 <select name="semester" id="semester" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
     <option value="" disabled selected>Select Semester</option>
     <option value="1st Semester">1st Sem</option>
@@ -49,7 +55,7 @@
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <input type="password" name="confirm_password" placeholder="Confirm password" required>
-            <button type="submit">Sign Up</button>
+            <button class="btn btn-primary">Sign Up</button>
         </form>
         
               {% with messages = get_flashed_messages(with_categories=true) %}

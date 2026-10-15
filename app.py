@@ -16,13 +16,7 @@ import random
 KTM = ZoneInfo("Asia/Kathmandu")
 
 def ktm_now():
-    # Return a NAIVE datetime that represents the current wall-clock time
-    # in Kathmandu. Mixing timezone-aware datetimes with SQLite (which has
-    # no real datetime type) causes functions like SQLite's date()/time()
-    # to silently reinterpret the offset and shift the calculated date,
-    # which previously broke the "already sent today" reminder check
-    # around midnight. Keeping everything naive-but-local keeps every
-    # comparison (log_date, notif_date, created_at) consistent.
+
     return datetime.now(KTM).replace(tzinfo=None)
 
 WEEK_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -149,12 +143,7 @@ class Weekly_plan(db.Model):
     wid = db.Column(db.Integer, primary_key=True)
     day_of_week = db.Column(db.String(20), nullable=False)
     hr = db.Column(db.Integer, nullable=False)
-    # NOTE: previously `time` was `unique=True` on its own, which meant
-    # no two users in the entire system could ever have a plan at the
-    # same clock time (e.g. two different students both studying at
-    # 6:00 PM would collide). The real constraint we want is "this user
-    # can't have two plans on the same day at the same time" — enforced
-    # below via a composite UniqueConstraint instead.
+   
     time = db.Column(db.Time, nullable=False)
     # Foreign Keys
     uid = db.Column(db.Integer, db.ForeignKey('user.uid'), nullable=False)
@@ -203,9 +192,6 @@ class Notification(db.Model):
 
     is_read = db.Column(db.Boolean, default=False)
 
-    # Structured dedupe columns — replaces parsing a "[Plan #wid]" tag
-    # out of the free-text message, which was fragile (any wording
-    # change to the message broke the dedupe check silently).
     plan_id = db.Column(db.Integer, db.ForeignKey('weekly_plan.wid'), nullable=True)
     notif_date = db.Column(db.Date, nullable=True)
 
@@ -242,7 +228,14 @@ def get_or_create_role(prefix, name, remarks=None):
 def signup():
     if request.method == "POST":
         name = request.form.get('name')
-        program= request.form.get('faculty')
+        faculty= request.form.get('faculty')
+        
+
+        custom_faculty = request.form.get('other_faculty')
+
+        if faculty == 'Others' and custom_faculty:
+
+         faculty = custom_faculty.strip()
         sem = request.form.get('semester')
         email = request.form.get('email')
         college = request.form.get("college")
@@ -277,7 +270,7 @@ def signup():
         
         new_user = User(
             name=name,
-            program=program,
+            program=faculty,
             sem=sem,
             email=email,
             col_id=college_record.col_id ,
@@ -426,7 +419,7 @@ def logout():
     session.clear()
     return redirect(url_for('home'))
 
-@app.route("/dashboard")
+@app.route("/home")
 def dashboard():
     if 'user_id' not in session:
         return redirect(url_for('login'))
@@ -496,8 +489,7 @@ def dashboard():
 
 @app.route("/about")
 def about():
-   if 'user_id' not in session:
-           return redirect(url_for('login'))
+
    return render_template('about.html')
 
 @app.route("/notes", methods=["GET"])
@@ -1161,22 +1153,25 @@ def progress():
         subject_map    = subject_map,
     )
 
-#profile
+# user profile at nav
 @app.context_processor
 def inject_navbar_user():
     if 'user_id' in session:
         user = db.session.get(User, session['user_id'])
         if user:
-
             name_str = (user.name or '').strip()
             parts = name_str.split()
+            
+      
             if len(parts) >= 2:
                 initials = parts[0][0].upper() + parts[-1][0].upper()
             elif len(parts) == 1:
                 initials = parts[0][0].upper()
             else:
                 initials = 'U'
+                
             return dict(current_navbar_user=user, navbar_initials=initials)
+            
     return dict(current_navbar_user=None, navbar_initials='')
 
 

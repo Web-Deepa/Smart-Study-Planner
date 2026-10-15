@@ -4,9 +4,14 @@
 {% block title %}Home page{% endblock %}
  
 {% block contents %}
-<div class="mt-5">
-    <h2>Study with Smart System</h2>
-    <h3>No more study is Perfect <br> Smart study is perfect</h3>
+<div class="mt-6  d-flex justify-content-end"> 
+  <a href="/about"><button class="btn btn-info mt-4">About Us</button></a> 
+</div>
+
+
+<div class="mt-2">
+    <h5>Study with Smart System</h5>
+    <h6>No more study is Perfect <br> Smart study is perfect</h6>
     <p>Please login or signup to plan your study</p>
 
     <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
@@ -18,5 +23,5 @@
 
 
          <p class="p-5">  तपाइको भविष्यको सारथी <br>
-            <img src="static/uploads/logo.png" width="150px" height="100px"> </p>
+            <img src="static/uploads/logo.png" width="100px" height="100px" class="rounded-circle"> </p>
 {% endblock %}
