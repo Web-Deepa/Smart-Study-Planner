@@ -1,4 +1,4 @@
-# 📚 Smart Study Planner
+# Smart Study Planner
 
 A comprehensive digital companion designed to revolutionize the way you plan, study, and track academic growth. This platform transforms chaotic study habits into structured, data-driven daily routines.
 
@@ -18,6 +18,6 @@ A comprehensive digital companion designed to revolutionize the way you plan, st
 
 *   **Frontend:** HTML5, CSS3, JavaScript ,Bootstrap 5
 *   **Backend:** Python / Flask 
-*   **Database:** Sqlite
+*   **Database:** MySQL
 
 
