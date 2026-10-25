@@ -18,6 +18,6 @@ A comprehensive digital companion designed to revolutionize the way you plan, st
 
 *   **Frontend:** HTML5, CSS3, JavaScript ,Bootstrap 5
 *   **Backend:** Python / Flask 
-*   **Database:** Sqlite
+*   **Database:** MySQL
 
 
