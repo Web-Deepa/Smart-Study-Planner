@@ -29,7 +29,7 @@ def upcoming_days():
 app = Flask(__name__)
 
 # Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///smart_study.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/smart_study'
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 
@@ -56,14 +56,7 @@ class College(db.Model):
     col_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     code = db.Column(db.String(50), unique=True, nullable=False)
-    PAN = db.Column(db.String(50), unique=True, nullable=True)
-    Reg_no = db.Column(db.String(50), unique=True, nullable=True)
-    longitude = db.Column(db.String(50), nullable=True)
-    latitude = db.Column(db.String(50), nullable=True)
-    url = db.Column(db.String(256), nullable=True)
-    contact_person = db.Column(db.String(100), nullable=True)
-    contact = db.Column(db.String(20), nullable=True)
-
+   
 class User(db.Model):
     __tablename__ = 'user'
     uid = db.Column(db.Integer, primary_key=True)
