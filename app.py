@@ -29,7 +29,7 @@ def upcoming_days():
 app = Flask(__name__)
 
 # Configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/smart_study'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///smart_study'
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 
