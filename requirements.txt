@@ -2,3 +2,6 @@ flask
 numpy
 sqlalchemy
 pymysql
+pymysql
+apscheduler
+flask-mail
