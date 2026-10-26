@@ -20,7 +20,7 @@ A comprehensive digital companion designed to revolutionize the way you plan, st
 *   **Backend:** Python / Flask 
 *   **Database:** SQlite
 
-  ## Live demo:smartstudyplan.pythonanywhere.com
+## 🔗Live Demo:smartstudyplan.pythonanywhere.com
   
   
 
