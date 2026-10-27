@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Myapp{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='responsive.css') }}">
+
+
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='responsive.css') }}">
+
+    {% block styles %}{% endblock %}
 </head>
 <body>
 
     {% if not hide_nav %}
-        {% include 'nav.html' %} 
+        {% include 'nav.html' %}
     {% endif %}
-     {% block styles %} {% endblock %}
-   
+
     <div class="container">
         {% block contents %}{% endblock %}
     </div>
 
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+
+   
+    {% block scripts %}{% endblock %}
 </body>
 </html>
