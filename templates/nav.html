@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-lg bg-light shadow-sm sticky-top border border-warning">
 
-  <div class="container-fluid flex-nowrap">
+  <div class="container-fluid">
 
     <!-- Brand Logo -->
     <a class="navbar-brand" href="#">
-      <img src="{{ url_for('static', filename='uploads/logo.png') }}" alt="logo" width="60" height="60" class="rounded-circle border border-dark ">
+      <img src="{{ url_for('static', filename='uploads/logo.png') }}" alt="logo" width="60" height="60" class="rounded-circle border border-dark">
     </a>
 
-    <!-- Action Items Area: Kept completely outside the collapsible list -->
+
     <div class="d-flex align-items-center ms-auto order-lg-3 gap-2 gap-sm-3">
-      
+
       <!-- Notifications Bell -->
       <a href="/notifications" class="nav-link position-relative px-2 fs-5" aria-label="Notifications">
         🔔
@@ -27,7 +27,7 @@
           {% if current_navbar_user.profile_pic %}
             <img src="{{ url_for('static', filename='uploads/' + current_navbar_user.profile_pic) }}"
                  alt="Profile"
-                 class="w-100 h-100 rounded-circle border border-dark  shadow-sm object-fit-cover d-block">
+                 class="w-100 h-100 rounded-circle border border-dark shadow-sm object-fit-cover d-block">
           {% else %}
             <div class="w-100 h-100 rounded-circle bg-info text-dark border border-dark d-flex align-items-center justify-content-center fw-bold shadow-sm lh-1"
                  style="font-size: 0.95rem; letter-spacing: 0.5px;">
@@ -37,17 +37,16 @@
         </a>
       {% endif %}
 
-      <!-- Hamburger Button (Only controls text links) -->
+      <!-- Hamburger Button  -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-   
-    <!-- Text Links Only -->
+
+    <!-- Text Links  -->
     <div class="collapse navbar-collapse order-lg-2" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
         <li class="nav-item"><a class="nav-link mx-2" href="/home">Home</a></li>
-       
         <li class="nav-item"><a class="nav-link mx-2" href="/notes">Notes</a></li>
         <li class="nav-item"><a class="nav-link mx-2" href="/week_plan">Weekly Plan</a></li>
         <li class="nav-item"><a class="nav-link mx-2" href="/progress">Progress</a></li>
